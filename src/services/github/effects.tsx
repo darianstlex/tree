@@ -4,6 +4,9 @@ import { client } from '../client';
 
 import { Response } from './types';
 
+/**
+ * Define GraphQL Query
+ */
 const GIT_SEARCH = gql`
   query GitSearch($query: String!, $first: Int!) {
     search(query: $query, type: REPOSITORY, first: $first) {
@@ -27,6 +30,9 @@ const GIT_SEARCH = gql`
   }
 `
 
+/**
+ * Create git search api effect
+ */
 export const gitSearch = createEffect({
   handler: (text: string): Promise<Response> => client.query({
     query: GIT_SEARCH,

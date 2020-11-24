@@ -5,7 +5,9 @@ import * as events from './events';
 import { ApolloQueryResult } from '@apollo/client';
 import { Response, ResponseRepo, Repo } from './types';
 
-
+/**
+ * Create repository list store and reducers
+ */
 export const $list = createStore([], { name: 'list' })
   .on(effects.gitSearch.doneData, (state, response: ApolloQueryResult<any> | Response) => response.data.search.edges.map((item: ResponseRepo): Repo => {
     const { node: { name, id: key, url, stargazers, forks } } = item;
