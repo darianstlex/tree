@@ -55,3 +55,9 @@ Then to run it use:
     -p 3000:3000 \
     -e CHOKIDAR_USEPOLLING=true \
     tree:dev
+
+## Authentication
+
+To be able to make request, you have to add in local storage your github token under:
+
+### `token`
