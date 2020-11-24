@@ -1,25 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Layout } from 'antd';
+import 'antd/dist/antd.css';
+import { useStore } from 'effector-react';
+import { SearchBar } from './components/SearchBar';
+import { GitTable } from './components/GitTable';
+import { githubService } from './services/github';
 
-function App() {
+import { Repo } from './services/github/types';
+
+import styles from './App.module.scss';
+
+const App = () => {
+  const $list: Repo[] = useStore(githubService.$);
+  const $loading = useStore(githubService.gitSearch.pending)
+  const onSearch = (text: string) => {
+    try {
+      return githubService.gitSearch(text);
+    } catch (e) {}
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout className={styles.content}>
+      <Layout.Header className={styles.header}>
+        <SearchBar onSearch={onSearch} />
+      </Layout.Header>
+      <Layout.Content>
+         <GitTable data={$list} loading={$loading}/>
+      </Layout.Content>
+    </Layout>
   );
 }
 
