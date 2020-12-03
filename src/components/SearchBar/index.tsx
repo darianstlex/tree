@@ -11,10 +11,10 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
   return (
     <Input.Search
       className={styles.search}
-      placeholder="git search string"
+      placeholder='git search string'
       allowClear
-      enterButton="Search"
-      size="large"
+      enterButton='Search'
+      size='large'
       onSearch={onSearch}
     />
   )
